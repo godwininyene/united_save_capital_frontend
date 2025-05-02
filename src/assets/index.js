@@ -8,7 +8,7 @@ import logo from "./logo.png";
 import quote from './quote.png';
 import robot from "./robot.png";
 import bitcoin from "./bitcoin.png";
-import shield from "./Shield.png";
+import shield from "./shield.png";
 import exchange from "./exchange.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
