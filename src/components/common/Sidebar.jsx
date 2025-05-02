@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { 
@@ -14,12 +14,19 @@ import { logo } from "../../assets";
 import { logout } from "../../utils/logout";
 import { HiOutlineLogout } from 'react-icons/hi';
 import LoadingIndicator from "./LoadingIndicator";
-const Sidebar = ({user}) => {
+const Sidebar = ({user, isToggle, setToggle}) => {
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
   const toggleSidebar = () => setIsOpen(!isOpen);
+
+
+
+  // Close sidebar when route changes
+  useEffect(() => {
+      setToggle(false);
+  }, [location.pathname, setToggle]);
 
   const user_links = [
     { name: "Dashboard", path: "user/dashboard", icon: <FaTachometerAlt /> },
@@ -54,7 +61,11 @@ const Sidebar = ({user}) => {
   };
 
   return (
-    <div className={`${isOpen ? "w-64" : "w-20"} h-screen transition-all duration-300 hidden lg:block`}>
+    <div
+        className={`fixed top-[65px] w-64 md:top-0 h-[calc(100vh-65px)] md:h-screen  bg-white dark:bg-slate-800 shadow-lg transition-transform duration-300 ease-in-out transform ${
+                isToggle ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+            } z-40 overflow-y-auto`}
+      >
       {/* Sidebar Container */}
       <div className="h-full flex flex-col bg-white border-r border-gray-200">
         {/* Brand Header */}
@@ -62,6 +73,7 @@ const Sidebar = ({user}) => {
           {isOpen && (
             <div className="flex items-center gap-2">
               <img src={logo} alt="United Save Capital" className="h-8" />
+              <h1 className="text-sm">United Save Capital</h1>
               {/* <span className="font-bold text-gray-800">United Save Capital</span> */}
             </div>
           )}

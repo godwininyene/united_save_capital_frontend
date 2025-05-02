@@ -10,11 +10,14 @@ const Footer = () => {
     <footer className={`${styles.flexCenter} ${styles.paddingY} flex-col`} data-aos="fade-up">
       <div className={`${styles.flexStart} md:flex-row flex-col mb-8 w-full`}>
         <div className="flex-[1] flex flex-col justify-start mr-10" data-aos="fade-right">
-          <img
-            src={logo}
-            alt="hoobank"
-            className="w-[266px] h-[72.14px] object-contain"
-          />
+          <div className="flex items-center gap-2">
+            <img
+              src={logo}
+              alt="hoobank"
+              className="w-[100px] object-contain"
+            />
+             <h1 className="text-sm text-white">United Save Capital</h1>
+          </div>
           <p className={`${styles.paragraph} mt-4 max-w-[312px]`}>
             A new way to make the payments easy, reliable and secure.
           </p>
