@@ -137,8 +137,8 @@ const navigate = useNavigate()
             <form className="space-y-4" onSubmit={handleSubmit}>
                 <h1 className="font-bold">Personal <span className="text-primary-2">Information:</span></h1>
                 {/* Name and Email */}
-                <div className="flex gap-x-5">
-                    <div className="w-full">
+                <div className="flex flex-col lg:flex-row gap-x-5">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Fullname</label>
                         <input
                             type="text"
@@ -168,8 +168,8 @@ const navigate = useNavigate()
                 </div>
 
                 {/* Phone & Dob */}
-                <div className="flex gap-x-5">
-                    <div className="w-full">
+                <div className="flex  flex-col lg:flex-row gap-x-5">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Phone</label>
                         <input
                             type="tel"
@@ -198,8 +198,8 @@ const navigate = useNavigate()
                 </div>
 
                 {/* Gender & Occupation */}
-                <div className="flex gap-x-5">
-                    <div className="w-full">
+                <div className="flex  flex-col lg:flex-row gap-x-5">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Gender</label>
                         <select
                             name="gender"
@@ -235,8 +235,8 @@ const navigate = useNavigate()
                 <h1 className="font-bold">Contact <span className="text-primary-2">Information:</span></h1>
 
                 {/* Country, city, & zip code */}
-                <div className="flex gap-x-5">
-                    <div className="w-full">
+                <div className="flex  flex-col lg:flex-row gap-x-5">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Country</label>
                         <select
                             name="country"
@@ -303,8 +303,8 @@ const navigate = useNavigate()
                 <h1 className="font-bold">Next of Kin <span className="text-primary-2">Information:</span></h1>
 
                  {/* Next of kin name, email, and phone */}
-                 <div className="flex gap-x-5">
-                    <div className="w-full">
+                 <div className="flex  flex-col lg:flex-row gap-x-5">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Name</label>
                         <input
                             name="nextKinName"
@@ -345,9 +345,9 @@ const navigate = useNavigate()
                 </div>
 
                 {/* Next of kin relationship and address */}
-                <div className="flex gap-x-5">
+                <div className="flex  flex-col lg:flex-row gap-x-5">
 
-                    <div className="w-full">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Relationship</label>
                         <input
                             name="nextKinRelationship"
@@ -379,9 +379,9 @@ const navigate = useNavigate()
 
                 <h1 className="font-bold">Account <span className="text-primary-2">Information:</span></h1>
                 {/* Currency, Password, and PasswordConfirm */}
-                <div className="flex gap-x-5">
+                <div className="flex  flex-col lg:flex-row gap-x-5">
 
-                    <div className="w-full">
+                    <div className="w-full mb-2 lg:mb-0">
 
                         <label className="block text-sm font-medium text-gray-300">Account Currency</label>
                         <select
@@ -418,7 +418,7 @@ const navigate = useNavigate()
                         <InputError message={errors.currency} />
                     </div>
 
-                    <div className="w-full">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Password</label>
                         <input
                             type="password"
@@ -469,8 +469,8 @@ const navigate = useNavigate()
                 <h1 className="font-bold">KYC <span className="text-primary-2">Verification:</span></h1>
 
                  {/* passport and document */}
-                 <div className="flex gap-x-5">
-                    <div className="w-full">
+                 <div className="flex  flex-col lg:flex-row gap-x-5">
+                    <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Passport Photograph</label>
                         <input
                             type="file"
