@@ -1,0 +1,196 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+@theme {
+  --color-primary: #00040f;
+  --color-primary-2:#FF4E50;
+  --color-primary-3:#F9D423;
+  --color-secondary: #FF4E50;
+  --color-dimWhite: rgba(255, 255, 255, 0.7);
+  --color-dimBlue: rgba(9, 151, 124, 0.1);
+  --black-gradient: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+  --font-poppins: Poppins, sans-serif;
+  --breakpoint-xs: 480px;
+  --breakpoint-ss: 620px;
+  --breakpoint-sm: 768px;
+  --breakpointmd: 1060px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1700px;
+
+  --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+
+  
+}
+
+/* Enable dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: #00d094;
+    --color-dark: #00150f;
+    --color-dark-light: #0b201a;
+    --color-text-dark: #939b99;
+    --color-primary-light: #fc9e12;
+  }
+  .dark {
+    --color-primary: #00d094;
+    --color-dark: #00150f;
+    --color-dark-light: #0b201a;
+    --color-text-dark: #939b99;
+    --color-primary-light: #fc9e12;
+  }
+}
+
+.trusted__card {
+  max-width: 320px;
+  position: absolute;
+  bottom: -20px;
+  transform: rotate(10deg);
+  left: 20px;
+}
+
+
+.trusted__thumb img {
+  border-radius: 0 0 212px 212px;
+}
+
+.trusted__thumb::before {
+  background-image: linear-gradient(90deg, #FF4E50 0%, #F9D423 100%);  
+}
+.bd-gradient-2 {  
+  background-image: linear-gradient(90deg, #FF4E50 0%, #F9D423 100%);  
+}
+
+.sidebar {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.bg-black-gradient {
+  background: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+}
+
+.bg-black-gradient-2 {
+  background: linear-gradient(
+    -168.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+}
+
+
+.bg-discount-gradient {
+  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+}
+
+.bg-blue-gradient {
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #bef3f5 -21.24%,
+    #9dedf0 12.19%,
+    #7de7eb 29.82%,
+    #5ce1e6 51.94%,
+    #33bbcf 90.29%
+  );
+}
+
+.pink__gradient {
+  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
+  filter: blur(900px);
+}
+
+.white__gradient {
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(750px);
+}
+/* 
+.blue__gradient {
+  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
+  filter: blur(123px);
+} */
+
+.blue__gradient {
+  background: linear-gradient(180deg, rgba(255, 78, 80, 0) 0%, #F9D423 100%);
+  filter: blur(123px);
+}
+
+
+
+.text-gradient {
+  background: radial-gradient(
+    64.18% 64.18% at 71.16% 35.69%,
+    #def9fa 0.89%,
+    #bef3f5 17.23%,
+    #9dedf0 42.04%,
+    #7de7eb 55.12%,
+    #5ce1e6 71.54%,
+    #33bbcf 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+.text-gradient-2 {  
+  background-image: linear-gradient(90deg, #FF4E50 0%, #F9D423 100%);  
+  -webkit-background-clip: text;  
+  -webkit-text-fill-color: transparent;  
+  background-clip: text;  
+  text-fill-color: transparent;  
+}
+
+
+.feature-card:hover,
+.feature-card-default {
+  background: var(--black-gradient);
+  box-shadow: var(--card-shadow);
+}
+
+
+.feedback-container .feedback-card:last-child {
+  margin-right: 0px;
+}
+
+.feedback-card {
+  background: transparent;
+}
+
+.feedback-card:hover {
+  background: var(--black-gradient);
+}
+
+
