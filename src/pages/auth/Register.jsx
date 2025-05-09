@@ -25,8 +25,8 @@ const Register = () => {
     nextKinAddress:"",
     currency:"",
     password: "",
-    passportPhoto:"",
-    identityDocument:"",
+    // passportPhoto:"",
+    // identityDocument:"",
     confirmPassword: "",
     transactionPin: "",
     keepSignedIn: false,
@@ -50,8 +50,8 @@ const Register = () => {
     nextKinAddress:"",
     currency:"",
     password: "",
-    passportPhoto:"",
-    identityDocument:"",
+    // passportPhoto:"",
+    // identityDocument:"",
     confirmPassword: "",
     transactionPin: "",
     keepSignedIn: false,
@@ -469,7 +469,7 @@ const navigate = useNavigate()
                 <h1 className="font-bold hidden">KYC <span className="text-primary-2">Verification:</span></h1>
 
                  {/* passport and document */}
-                 <div className="hidden  flex-col lg:flex-row gap-x-5">
+                 {/* <div className="hidden  flex-col lg:flex-row gap-x-5">
                     <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Passport Photograph</label>
                         <input
@@ -506,7 +506,7 @@ const navigate = useNavigate()
                         </p>
 
                     </div>
-                </div>
+                </div> */}
 
                 {/* Keep me signed in */}
                 <div className="flex items-center">
