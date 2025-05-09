@@ -466,10 +466,10 @@ const navigate = useNavigate()
 
                 <hr className="my-7 block border-[0.5px] border-gray-400"/>
 
-                <h1 className="font-bold">KYC <span className="text-primary-2">Verification:</span></h1>
+                <h1 className="font-bold hidden">KYC <span className="text-primary-2">Verification:</span></h1>
 
                  {/* passport and document */}
-                 <div className="flex  flex-col lg:flex-row gap-x-5">
+                 <div className="hidden  flex-col lg:flex-row gap-x-5">
                     <div className="w-full mb-2 lg:mb-0">
                         <label className="block text-sm font-medium text-gray-300">Passport Photograph</label>
                         <input
