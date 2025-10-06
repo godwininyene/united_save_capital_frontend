@@ -32,7 +32,7 @@ const Banner = () => {
             Our Services: <br className="sm:block hidden" />
             <span className="text-gradient-2">Your Trusted <br className="sm:block hidden" /> Financial Partner</span>
           </h1>
-          <div className="mt-3">
+          <div className="mt-5">
             <Button />
           </div>
         </div>

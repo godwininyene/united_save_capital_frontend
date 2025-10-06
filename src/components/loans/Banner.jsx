@@ -32,7 +32,7 @@ const Banner = () => {
             Experience <br /> Our various: <br className="sm:block hidden" />
             <span className="text-gradient-2">Loans Options</span>
           </h1>
-          <div className="mt-3" data-aos="fade-up" data-aos-delay="500" data-aos-duration="700">
+          <div className="mt-5" data-aos="fade-up" data-aos-delay="500" data-aos-duration="700">
             <Button />
           </div>
         </div>

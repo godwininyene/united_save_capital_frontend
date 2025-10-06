@@ -35,7 +35,7 @@ const Billing = () => {
         </p>
 
         <div
-          className="flex items-center gap-x-2 sm:mt-10 mt-6" 
+          className="flex flex-col lg:flex-row items-center gap-x-2 sm:mt-10 mt-6" 
           data-aos="fade-up"
           data-aos-duration="800"
           data-aos-delay="200"
@@ -44,7 +44,7 @@ const Billing = () => {
           <img
             src={google}
             alt="google_play"
-            className="w-[144.17px] h-[43.08px] object-contain cursor-pointer"
+            className="w-[144.17px] h-[43.08px] object-contain cursor-pointer mt-5 lg:mt-0"
           />
         </div>
       </div>

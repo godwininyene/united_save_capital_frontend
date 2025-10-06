@@ -12,7 +12,7 @@ const CardDeal = () => (
       <h2 className={styles.heading2}>
         Send money worldwide instantly and securely.
       </h2>
-      <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
+      <p className={`${styles.paragraph} max-w-[470px] mt-5 mb-5 lg:mb-0`}>
         Enjoy fast, secure, and hassle-free international money transfers.
         Whether sending funds to family, paying for services, or managing
         global transactions, our platform ensures seamless and reliable transfers in real-time.

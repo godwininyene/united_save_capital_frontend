@@ -62,7 +62,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <div className="w-full md:w-1/2 lg:w-[57%] grow">
+            <div className="w-full md:w-1/2 lg:w-[57%] grow mt-7 lg:mt-0">
               <div className="md:ml-7 mt-3 md:mt-0">
                 <div
                   className="flex mb-5"

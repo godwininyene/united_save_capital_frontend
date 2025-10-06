@@ -26,7 +26,7 @@ const Banner = () => {
               Welcome to United <br /> Capital Bank
             </span>
           </h1>
-          <div className="mt-3" data-aos="fade-up">
+          <div className="mt-5" data-aos="fade-up">
             <Button />
           </div>
         </div>

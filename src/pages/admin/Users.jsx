@@ -383,7 +383,7 @@ const StatCard = ({ title, value, icon, color }) => (
 
 // User List View Component with dark mode
 const UserListView = ({ users, onView, onStatusChange, onDelete, loading, statusBadge }) => (
-  <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-slate-600">
+  <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-600">
     <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-600">
       <thead className="bg-gray-50 dark:bg-slate-700">
         <tr>

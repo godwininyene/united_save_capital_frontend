@@ -34,7 +34,7 @@ const Business = () => {
         data-aos-duration="800"
       >
         <h2 className={styles.heading2}>Providing financial access for everyone.</h2>
-        <p className={`${styles.paragraph} max-w-[470px]`}>
+        <p className={`${styles.paragraph} max-w-[470px] mb-5 lg:mb-0`}>
           Our platform is designed to make banking simple, secure, and accessible to everyone,
           regardless of their financial background. We provide seamless digital banking solutions
           that empower individuals and businesses to save, invest, and transact with ease.
