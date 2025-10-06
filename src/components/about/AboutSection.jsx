@@ -57,7 +57,7 @@ const AboutSection = () => {
                   </h2>
                 </div>
               </div>
-              <div className="mt-3">
+              <div className="mt-7">
                 <Button styles={"w-full"} />
               </div>
             </div>

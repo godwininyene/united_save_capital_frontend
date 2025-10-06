@@ -14,14 +14,13 @@ import { logo } from "../../assets";
 import { logout } from "../../utils/logout";
 import { HiOutlineLogout } from 'react-icons/hi';
 import LoadingIndicator from "./LoadingIndicator";
+
 const Sidebar = ({user, isToggle, setToggle}) => {
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const location = useLocation();
   const toggleSidebar = () => setIsOpen(!isOpen);
-
-
 
   // Close sidebar when route changes
   useEffect(() => {
@@ -62,29 +61,21 @@ const Sidebar = ({user, isToggle, setToggle}) => {
 
   return (
     <div
-        className={`fixed top-[65px] w-64 md:top-0 h-[calc(100vh-65px)] md:h-screen  bg-white dark:bg-slate-800 shadow-lg transition-transform duration-300 ease-in-out transform ${
+        className={`fixed top-[65px] w-64 md:top-0 h-[calc(100vh-65px)] md:h-screen bg-white dark:bg-slate-800 shadow-lg transition-transform duration-300 ease-in-out transform ${
                 isToggle ? "translate-x-0" : "-translate-x-full md:translate-x-0"
             } z-40 overflow-y-auto`}
       >
       {/* Sidebar Container */}
-      <div className="h-full flex flex-col bg-white border-r border-gray-200">
+      <div className="h-full flex flex-col bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700">
         {/* Brand Header */}
-        <div className={`p-4 border-b border-gray-200 ${isOpen ? "flex items-center justify-between" : "flex justify-center"}`}>
+        <div className={`p-4 border-b border-gray-200 dark:border-slate-700 ${isOpen ? "flex items-center justify-between" : "flex justify-center"}`}>
           {isOpen && (
             <div className="flex items-center gap-2">
               <img src={logo} alt="United Save Capital" className="h-8" />
-              <h1 className="text-sm">United Save Capital</h1>
-              {/* <span className="font-bold text-gray-800">United Save Capital</span> */}
+              <h1 className="text-sm text-gray-800 dark:text-slate-100">United Save Capital</h1>
             </div>
           )}
           {!isOpen && <img src={logo} alt="USC" className="h-8" />}
-          
-          {/* <button
-            onClick={toggleSidebar}
-            className="p-1 rounded-full hover:bg-gray-100 transition-colors"
-          >
-            {isOpen ? <FaTimes className="text-gray-500" /> : <FaBars className="text-gray-500" />}
-          </button> */}
         </div>
 
         {/* Navigation Links */}
@@ -95,14 +86,14 @@ const Sidebar = ({user, isToggle, setToggle}) => {
               to={link.path}
               className={`flex items-center gap-3 p-3 my-1 rounded-lg transition-all ${
                 location.pathname.split('/account/')[1] === link.path
-                  ? "bg-primary-2/10 text-primary-2 font-medium"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? "bg-primary-2/10 dark:bg-blue-500/20 text-primary-2 dark:text-blue-400 font-medium"
+                  : "text-gray-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
               }`}
             >
               <span className={`text-lg ${
                 location.pathname.split('/account/')[1] === link.path 
-                  ? "text-primary-2" 
-                  : "text-gray-500"
+                  ? "text-primary-2 dark:text-blue-400" 
+                  : "text-gray-500 dark:text-slate-400"
               }`}>
                 {link.icon}
               </span>
@@ -127,13 +118,6 @@ const Sidebar = ({user, isToggle, setToggle}) => {
               )}
             </button>
         </nav>
-
-        {/* Collapsed State Indicator (optional) */}
-        {/* {!isOpen && (
-          <div className="p-2 border-t border-gray-200 text-center">
-            <span className="text-xs text-gray-500">◄ Hover</span>
-          </div>
-        )} */}
       </div>
     </div>
   );

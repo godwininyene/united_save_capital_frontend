@@ -261,42 +261,42 @@ const ManageLoans = () => {
   };
 
   const StatusBadge = ({ status }) => {
-    const baseClass = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium";
+    const baseClass = "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors";
     switch(status) {
       case 'approved':
-        return <span className={`${baseClass} bg-green-100 text-green-800`}>Approved</span>;
+        return <span className={`${baseClass} bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300`}>Approved</span>;
       case 'pending':
-        return <span className={`${baseClass} bg-yellow-100 text-yellow-800`}>Pending</span>;
+        return <span className={`${baseClass} bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300`}>Pending</span>;
       case 'rejected':
-        return <span className={`${baseClass} bg-red-100 text-red-800`}>Rejected</span>;
+        return <span className={`${baseClass} bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300`}>Rejected</span>;
       default:
-        return <span className={`${baseClass} bg-gray-100 text-gray-800`}>{status}</span>;
+        return <span className={`${baseClass} bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300`}>{status}</span>;
     }
   };
 
   const RepaymentPlanBadge = ({ plan }) => {
-    const baseClass = "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium";
+    const baseClass = "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium transition-colors";
     switch(plan) {
       case 'weekly':
-        return <span className={`${baseClass} bg-blue-50 text-blue-700`}>Weekly</span>;
+        return <span className={`${baseClass} bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300`}>Weekly</span>;
       case 'bi-weekly':
-        return <span className={`${baseClass} bg-green-50 text-green-700`}>Bi-Weekly</span>;
+        return <span className={`${baseClass} bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-300`}>Bi-Weekly</span>;
       case 'monthly':
-        return <span className={`${baseClass} bg-purple-50 text-purple-700`}>Monthly</span>;
+        return <span className={`${baseClass} bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300`}>Monthly</span>;
       default:
-        return <span className={`${baseClass} bg-gray-50 text-gray-700`}>{plan}</span>;
+        return <span className={`${baseClass} bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300`}>{plan}</span>;
     }
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
+    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-6 transition-colors">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
             <BsCashCoin className="text-primary-2" /> Loan Management
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             View and manage all loan applications
           </p>
         </div>
@@ -304,14 +304,14 @@ const ManageLoans = () => {
         <div className="flex items-center gap-3 mt-4 md:mt-0">
           <button
             onClick={handleRefresh}
-            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700"
+            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-300 transition-colors"
             disabled={loading}
           >
             <FiRefreshCw className={`h-5 w-5 ${loading ? 'animate-spin' : ''}`} />
           </button>
           <button
             onClick={handleExport}
-            className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg"
+            className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors"
             disabled={filteredLoans.length === 0}
           >
             <FiDownload className="h-5 w-5" /> Export
@@ -321,42 +321,42 @@ const ManageLoans = () => {
 
       {/* Error and Success Messages */}
       {errors.general && (
-        <div className="mb-4 p-4 bg-red-50 border-l-4 border-red-500 rounded">
+        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded transition-colors">
           <div className="flex">
             <div className="flex-shrink-0">
               <FiX className="h-5 w-5 text-red-500" />
             </div>
             <div className="ml-3">
-              <p className="text-sm text-red-700">{errors.general}</p>
+              <p className="text-sm text-red-700 dark:text-red-300">{errors.general}</p>
             </div>
           </div>
         </div>
       )}
 
       {successMessage && (
-        <div className="mb-4 p-4 bg-green-50 border-l-4 border-green-500 rounded">
+        <div className="mb-4 p-4 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 rounded transition-colors">
           <div className="flex">
             <div className="flex-shrink-0">
               <FiCheck className="h-5 w-5 text-green-500" />
             </div>
             <div className="ml-3">
-              <p className="text-sm text-green-700">{successMessage}</p>
+              <p className="text-sm text-green-700 dark:text-green-300">{successMessage}</p>
             </div>
           </div>
         </div>
       )}
 
       {/* Filters and Search */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-6">
+      <div className="bg-gray-50 dark:bg-slate-700/50 rounded-lg p-4 mb-6 transition-colors">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="relative md:col-span-1">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-gray-400" />
+              <FiSearch className="text-gray-400 dark:text-gray-500" />
             </div>
             <input
               type="text"
               placeholder="Search loans..."
-              className="pl-10 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-2 focus:border-primary-2"
+              className="pl-10 w-full p-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-2 focus:border-primary-2 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -433,20 +433,20 @@ const ManageLoans = () => {
       )}
 
       {/* Loans Table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+      <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-600">
+        <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-600">
+          <thead className="bg-gray-50 dark:bg-slate-700">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Loan ID</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Payable</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Loan ID</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">User</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Amount</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total Payable</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Duration</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-600">
             {!fetched ? (
               <tr>
                 <td colSpan={7} className="px-6 py-4 text-center">
@@ -455,18 +455,18 @@ const ManageLoans = () => {
               </tr>
             ) : filteredLoans.length > 0 ? (
               filteredLoans.map(loan => (
-                <tr key={loan._id} className="hover:bg-gray-50">
+                <tr key={loan._id} className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">
                       {loan._id.slice(-8)}
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
                       {moment(loan.createdAt).format('MMM D, YYYY')}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
+                      <div className="flex-shrink-0 h-10 w-10 bg-gray-200 dark:bg-slate-600 rounded-full flex items-center justify-center">
                         {loan.user?.photo ? (
                           <img 
                             src={`${base_url}/${loan.user.photo}`} 
@@ -478,31 +478,31 @@ const ManageLoans = () => {
                         )}
                       </div>
                       <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
+                        <div className="text-sm font-medium text-gray-900 dark:text-white">
                           {loan.user?.fullname || 'N/A'}
                         </div>
-                        <div className="text-sm text-gray-500">
+                        <div className="text-sm text-gray-500 dark:text-gray-400">
                           {loan.user?.email || 'N/A'}
                         </div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">
                       ${loan.amount?.toLocaleString() || '0'}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
+                    <div className="text-sm font-medium text-gray-900 dark:text-white">
                       ${loan.totalPayable?.toLocaleString() || '0'}
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
                       {loan.monthlyPayment ? `$${loan.monthlyPayment}/mo` : ''}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <RepaymentPlanBadge plan={loan.repaymentPlan} />
-                    <div className="text-sm text-gray-500 mt-1">
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                       {loan.duration || '0'} months
                     </div>
                   </td>
@@ -516,7 +516,7 @@ const ManageLoans = () => {
                           setSelectedLoan(loan);
                           setIsModalOpen(true);
                         }}
-                        className="text-primary-2 cursor-pointer hover:text-primary-600 p-1 rounded hover:bg-primary-2/10"
+                        className="text-primary-2 cursor-pointer hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 p-1 rounded hover:bg-primary-2/10 dark:hover:bg-primary-400/10 transition-colors"
                       >
                         <FiEye />
                       </button>
@@ -524,14 +524,14 @@ const ManageLoans = () => {
                         <>
                           <button
                             onClick={() => handleApprove(loan._id)}
-                            className="text-green-500 cursor-pointer hover:text-green-700 p-1 rounded hover:bg-green-500/10"
+                            className="text-green-500 cursor-pointer hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-500/10 dark:hover:bg-green-400/10 transition-colors"
                             disabled={approving}
                           >
                             <FiCheck />
                           </button>
                           <button
                             onClick={() => handleReject(loan._id)}
-                            className="text-red-500 cursor-pointer hover:text-red-700 p-1 rounded hover:bg-red-500/10"
+                            className="text-red-500 cursor-pointer hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-500/10 dark:hover:bg-red-400/10 transition-colors"
                             disabled={rejecting}
                           >
                             <FiX />
@@ -542,17 +542,16 @@ const ManageLoans = () => {
                       {loan.status === 'approved' && (
                         <button
                           onClick={() => handleReject(loan._id)}
-                          className="text-red-500 cursor-pointer hover:text-red-700 p-1 rounded hover:bg-red-500/10"
+                          className="text-red-500 cursor-pointer hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-500/10 dark:hover:bg-red-400/10 transition-colors"
                           disabled={rejecting}
                         >
                           <FiX />
                         </button>
                       )}
                       {loan.status === 'rejected' && (
-                        
                         <button
                           onClick={() => handleApprove(loan._id)}
-                          className="text-green-500 cursor-pointer hover:text-green-700 p-1 rounded hover:bg-green-500/10"
+                          className="text-green-500 cursor-pointer hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-500/10 dark:hover:bg-green-400/10 transition-colors"
                           disabled={approving}
                         >
                           <FiCheck />
@@ -568,7 +567,7 @@ const ManageLoans = () => {
                   <EmptyState 
                     title="No loans found"
                     description="Try adjusting your search or filter criteria"
-                    icon={<BsCashCoin className="text-gray-400 text-4xl" />}
+                    icon={<BsCashCoin className="text-gray-400 dark:text-gray-500 text-4xl" />}
                   />
                 </td>
               </tr>
@@ -587,13 +586,13 @@ const ManageLoans = () => {
         {selectedLoan && (
           <div className="space-y-4 p-6">
             {errors.general && (
-              <div className="mb-4 p-4 bg-red-50 border-l-4 border-red-500 rounded">
+              <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded transition-colors">
                 <div className="flex">
                   <div className="flex-shrink-0">
                     <FiX className="h-5 w-5 text-red-500" />
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-red-700">{errors.general}</p>
+                    <p className="text-sm text-red-700 dark:text-red-300">{errors.general}</p>
                   </div>
                 </div>
               </div>
@@ -601,64 +600,64 @@ const ManageLoans = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-500">Loan ID</p>
-                <p className="font-medium">{selectedLoan._id}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Loan ID</p>
+                <p className="font-medium text-gray-900 dark:text-white">{selectedLoan._id}</p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Status</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Status</p>
                 <StatusBadge status={selectedLoan.status} />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Application Date</p>
-                <p className="font-medium">
+                <p className="text-sm text-gray-500 dark:text-gray-400">Application Date</p>
+                <p className="font-medium text-gray-900 dark:text-white">
                   {moment(selectedLoan.createdAt).format('MMM D, YYYY h:mm A')}
                 </p>
               </div>
               {selectedLoan.approvedAt && (
                 <div>
-                  <p className="text-sm text-gray-500">Approved Date</p>
-                  <p className="font-medium">
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Approved Date</p>
+                  <p className="font-medium text-gray-900 dark:text-white">
                     {moment(selectedLoan.approvedAt).format('MMM D, YYYY h:mm A')}
                   </p>
                 </div>
               )}
               <div>
-                <p className="text-sm text-gray-500">Loan Amount</p>
-                <p className="text-xl font-bold text-gray-800">
+                <p className="text-sm text-gray-500 dark:text-gray-400">Loan Amount</p>
+                <p className="text-xl font-bold text-gray-800 dark:text-white">
                   ${selectedLoan.amount?.toLocaleString() || '0'}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Total Payable</p>
-                <p className="text-xl font-bold text-gray-800">
+                <p className="text-sm text-gray-500 dark:text-gray-400">Total Payable</p>
+                <p className="text-xl font-bold text-gray-800 dark:text-white">
                   ${selectedLoan.totalPayable?.toLocaleString() || '0'}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Repayment Plan</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Repayment Plan</p>
                 <div className="flex items-center gap-2">
                   <RepaymentPlanBadge plan={selectedLoan.repaymentPlan} />
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
                     ({selectedLoan.duration || '0'} months)
                   </span>
                 </div>
               </div>
               <div>
-                <p className="text-sm text-gray-500">Monthly Payment</p>
-                <p className="font-medium">
+                <p className="text-sm text-gray-500 dark:text-gray-400">Monthly Payment</p>
+                <p className="font-medium text-gray-900 dark:text-white">
                   ${selectedLoan.monthlyPayment?.toFixed(2) || '0.00'}
                 </p>
               </div>
               <div className="md:col-span-2">
-                <p className="text-sm text-gray-500">Purpose</p>
-                <p className="font-medium">{selectedLoan.purpose || 'N/A'}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Purpose</p>
+                <p className="font-medium text-gray-900 dark:text-white">{selectedLoan.purpose || 'N/A'}</p>
               </div>
             </div>
 
-            <div className="border-t border-gray-200 pt-4">
-              <h3 className="text-sm font-medium text-gray-500 mb-2">User Details</h3>
+            <div className="border-t border-gray-200 dark:border-slate-600 pt-4">
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">User Details</h3>
               <div className="flex items-center space-x-4">
-                <div className="flex-shrink-0 h-12 w-12 bg-gray-200 rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 h-12 w-12 bg-gray-200 dark:bg-slate-600 rounded-full flex items-center justify-center">
                   {selectedLoan.user?.photo ? (
                     <img 
                       src={`${base_url}/${selectedLoan.user.photo}`} 
@@ -666,19 +665,19 @@ const ManageLoans = () => {
                       className="h-full w-full rounded-full object-cover" 
                     />
                   ) : (
-                    <FiUser className="text-gray-400 text-xl" />
+                    <FiUser className="text-gray-400 dark:text-gray-500 text-xl" />
                   )}
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900">{selectedLoan.user?.fullname || 'N/A'}</p>
+                  <p className="font-medium text-gray-900 dark:text-white">{selectedLoan.user?.fullname || 'N/A'}</p>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm mt-1">
                     <div>
-                      <span className="text-gray-500">Email: </span>
-                      <span>{selectedLoan.user?.email || 'N/A'}</span>
+                      <span className="text-gray-500 dark:text-gray-400">Email: </span>
+                      <span className="text-gray-900 dark:text-white">{selectedLoan.user?.email || 'N/A'}</span>
                     </div>
                     <div>
-                      <span className="text-gray-500">Phone: </span>
-                      <span>{selectedLoan.user?.phone || 'N/A'}</span>
+                      <span className="text-gray-500 dark:text-gray-400">Phone: </span>
+                      <span className="text-gray-900 dark:text-white">{selectedLoan.user?.phone || 'N/A'}</span>
                     </div>
                   </div>
                 </div>
@@ -686,17 +685,17 @@ const ManageLoans = () => {
             </div>
 
             {selectedLoan.status === 'pending' && (
-              <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+              <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-slate-600">
                 <button
                   onClick={() => handleReject(selectedLoan._id)}
-                  className="px-4 py-2 cursor-pointer bg-red-500 hover:bg-red-600 text-white rounded-lg flex items-center gap-2"
+                  className="px-4 py-2 cursor-pointer bg-red-500 hover:bg-red-600 text-white rounded-lg flex items-center gap-2 transition-colors"
                   disabled={rejecting}
                 >
                   {rejecting ? <LoadingIndicator size={4} /> : <FiX />} Reject
                 </button>
                 <button
                   onClick={() => handleApprove(selectedLoan._id)}
-                  className="px-4 py-2 cursor-pointer bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center gap-2"
+                  className="px-4 py-2 cursor-pointer bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center gap-2 transition-colors"
                   disabled={approving}
                 >
                   {approving ? <LoadingIndicator size={4} /> : <FiCheck />} Approve
@@ -705,10 +704,10 @@ const ManageLoans = () => {
             )}
 
             {selectedLoan.status === 'approved' && (
-              <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+              <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-slate-600">
                 <button
                   onClick={() => handleReject(selectedLoan._id)}
-                  className="px-4 py-2 cursor-pointer bg-red-500 hover:bg-red-600 text-white rounded-lg flex items-center gap-2"
+                  className="px-4 py-2 cursor-pointer bg-red-500 hover:bg-red-600 text-white rounded-lg flex items-center gap-2 transition-colors"
                   disabled={rejecting}
                 >
                   {rejecting ? <LoadingIndicator size={4} /> : <FiX />} Reject
@@ -717,10 +716,10 @@ const ManageLoans = () => {
             )}
 
             {selectedLoan.status === 'rejected' && (
-              <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+              <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-slate-600">
                 <button
                   onClick={() => handleApprove(selectedLoan._id)}
-                  className="px-4 py-2 cursor-pointer bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center gap-2"
+                  className="px-4 py-2 cursor-pointer bg-green-500 hover:bg-green-600 text-white rounded-lg flex items-center gap-2 transition-colors"
                   disabled={approving}
                 >
                   {approving ? <LoadingIndicator size={4} /> : <FiCheck />} Approve
@@ -735,13 +734,13 @@ const ManageLoans = () => {
 };
 
 const StatCard = ({ title, value, icon, color }) => (
-  <div className={`bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow`}>
+  <div className="bg-white dark:bg-slate-700 rounded-xl border border-gray-200 dark:border-slate-600 p-4 hover:shadow-md transition-all">
     <div className="flex justify-between items-center">
       <div>
-        <p className="text-sm text-gray-500">{title}</p>
-        <h3 className="text-2xl font-bold text-gray-800">{value}</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{title}</p>
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{value}</h3>
       </div>
-      <div className={`p-3 rounded-lg bg-${color}/10 text-${color}`}>
+      <div className={`p-3 rounded-lg bg-${color}/10 text-${color} dark:bg-${color}/20`}>
         {icon}
       </div>
     </div>

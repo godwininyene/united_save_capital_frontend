@@ -27,9 +27,10 @@ import LoadingIndicator from '../../components/common/LoadingIndicator';
 import EmptyState from '../../components/common/EmptyState';
 import UserDetail from './UserDetails';
 import FundAccount from './FundAccount';
+
 const base_url = import.meta.env.VITE_APP_BASE_URL;
+
 const Users = () => {
- 
   const [viewMode, setViewMode] = useState('list');
   const [currentScreen, setCurrentScreen] = useState('users_list');
   const [loading, setLoading] = useState(false);
@@ -79,8 +80,6 @@ const Users = () => {
       results = results.filter(user => user.status === filters.status);
     }
     
-    
-
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       results = results.filter(user => 
@@ -89,7 +88,6 @@ const Users = () => {
          user.phone?.toLowerCase().includes(term))
       );
     }
-    
     
     setFilteredUsers(results);
   }, [filters, searchTerm, users]);
@@ -106,7 +104,6 @@ const Users = () => {
       });
       
       if (response.data.status === 'success') {
-        // Update both local users and refetch data to ensure consistency
         await fetchData();
       }
     } catch (error) {
@@ -122,7 +119,6 @@ const Users = () => {
     setLoading(true);
     try {
       await axios.delete(`api/v1/users/${userId}`);
-      // Refetch data instead of local update to ensure consistency
       await fetchData();
       if (selectedUser?._id === userId) {
         setSelectedUser(null);
@@ -143,31 +139,31 @@ const Users = () => {
     }
   };
 
-  // Status badge component
+  // Status badge component with dark mode support
   const statusBadge = (status) => {
-    const baseClass = "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium";
+    const baseClass = "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-colors";
     switch(status) {
       case 'active':
         return (
-          <span className={`${baseClass} bg-green-100 text-green-800`}>
+          <span className={`${baseClass} bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300`}>
             <FaUserCheck className="h-4 w-4 mr-1" /> Active
           </span>
         );
       case 'pending':
         return (
-          <span className={`${baseClass} bg-orange-100 text-orange-800`}>
+          <span className={`${baseClass} bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300`}>
             <FaUserClock className="h-4 w-4 mr-1" /> Pending
           </span>
         );
       case 'deactivated':
         return (
-          <span className={`${baseClass} bg-gray-100 text-gray-800`}>
+          <span className={`${baseClass} bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300`}>
             <FaUserTimes className="h-4 w-4 mr-1" /> Deactivated
           </span>
         );
       default:
         return (
-          <span className={`${baseClass} bg-gray-100 text-gray-800`}>
+          <span className={`${baseClass} bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300`}>
             Unknown
           </span>
         );
@@ -176,14 +172,14 @@ const Users = () => {
 
   if (currentScreen === 'fund_user') {
     return (
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-6 transition-colors">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
             <FiDollarSign className="text-primary-2" /> Fund User Account
           </h2>
           <button 
             onClick={() => setCurrentScreen('users_list')}
-            className="flex items-center text-primary-2 hover:underline cursor-pointer"
+            className="flex items-center text-primary-2 hover:underline cursor-pointer dark:text-primary-400"
           >
             <FiArrowRight className="transform rotate-180 mr-2" /> Back to Users
           </button>
@@ -192,9 +188,6 @@ const Users = () => {
           user={selectedUser} 
           onBack={() => setCurrentScreen('users_list')} 
           onComplete={(user) => {
-            // setCurrentScreen('users_list');
-            // fetchData(); // Refresh all data after funding
-
             setSelectedUser(user);
             updateUserInList(user);
           }}
@@ -204,14 +197,14 @@ const Users = () => {
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
+    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-6 transition-colors">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center gap-2">
             <FiUsers className="text-primary-2" /> User Management
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             Manage all registered users and their accounts
           </p>
         </div>
@@ -219,7 +212,7 @@ const Users = () => {
         <div className="flex items-center gap-3 mt-4 md:mt-0">
           <button 
             onClick={() => setViewMode(viewMode === 'list' ? 'grid' : 'list')}
-            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700"
+            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-gray-700 dark:text-gray-300 transition-colors"
             aria-label={`Switch to ${viewMode === 'list' ? 'grid' : 'list'} view`}
           >
             {viewMode === 'list' ? <FiGrid /> : <FiList />}
@@ -228,16 +221,16 @@ const Users = () => {
       </div>
 
       {/* Filters and Search */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-6">
+      <div className="bg-gray-50 dark:bg-slate-700/50 rounded-lg p-4 mb-6 transition-colors">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <FiSearch className="text-gray-400" />
+              <FiSearch className="text-gray-400 dark:text-gray-500" />
             </div>
             <input
               type="text"
               placeholder="Search users..."
-              className="pl-10 w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-2 focus:border-primary-2"
+              className="pl-10 w-full p-2 border border-gray-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-primary-2 focus:border-primary-2 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -270,7 +263,7 @@ const Users = () => {
         </div>
       </div>
 
-      {/* Stats Cards - Using stats from API */}
+      {/* Stats Cards */}
       {stats && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <StatCard 
@@ -311,11 +304,11 @@ const Users = () => {
           description={searchTerm || filters.status !== 'all' 
             ? "Try adjusting your search or filter criteria" 
             : "There are currently no users in the system"}
-          icon={<FiUser className="text-gray-400 text-4xl" />}
+          icon={<FiUser className="text-gray-400 dark:text-gray-500 text-4xl" />}
           action={
             <button
               onClick={fetchData}
-              className="mt-4 px-4 py-2 bg-primary-2 text-white rounded-lg hover:bg-primary-2/90"
+              className="mt-4 px-4 py-2 bg-primary-2 text-white rounded-lg hover:bg-primary-2/90 transition-colors"
             >
               Refresh Data
             </button>
@@ -353,7 +346,7 @@ const Users = () => {
         onClose={() => setIsModalOpen(false)}
         title="User Details"
         show={isModalOpen} 
-        maxWidth="sm"
+        maxWidth="md"
       >
         {selectedUser && (
           <UserDetail 
@@ -373,79 +366,79 @@ const Users = () => {
   );
 };
 
-// Stat Card Component
+// Stat Card Component with dark mode
 const StatCard = ({ title, value, icon, color }) => (
-  <div className={`bg-white rounded-xl border border-gray-200 p-4 hover:shadow-md transition-shadow`}>
+  <div className="bg-white dark:bg-slate-700 rounded-xl border border-gray-200 dark:border-slate-600 p-4 hover:shadow-md transition-all">
     <div className="flex justify-between items-center">
       <div>
-        <p className="text-sm text-gray-500">{title}</p>
-        <h3 className="text-2xl font-bold text-gray-800">{value}</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{title}</p>
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{value}</h3>
       </div>
-      <div className={`p-3 rounded-lg bg-${color}/10 text-${color}`}>
+      <div className={`p-3 rounded-lg bg-${color}/10 text-${color} dark:bg-${color}/20`}>
         {icon}
       </div>
     </div>
   </div>
 );
 
-// User List View Component
+// User List View Component with dark mode
 const UserListView = ({ users, onView, onStatusChange, onDelete, loading, statusBadge }) => (
-  <div className="overflow-hidden rounded-lg border border-gray-200">
-    <table className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-gray-50">
+  <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-slate-600">
+    <table className="min-w-full divide-y divide-gray-200 dark:divide-slate-600">
+      <thead className="bg-gray-50 dark:bg-slate-700">
         <tr>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Saving</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Checking</th>
-          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined</th>
-          <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">User</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Saving</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Checking</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Joined</th>
+          <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
         </tr>
       </thead>
-      <tbody className="bg-white divide-y divide-gray-200">
+      <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-600">
         {users.map(user => (
-          <tr key={user._id} className="hover:bg-gray-50">
+          <tr key={user._id} className="hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors">
             <td className="px-6 py-4 whitespace-nowrap">
               <div className="flex items-center">
-                <div className="flex-shrink-0 h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">
+                <div className="flex-shrink-0 h-10 w-10 bg-gray-200 dark:bg-slate-600 rounded-full flex items-center justify-center">
                   {user.photo ? (
-                    <img  src={`${base_url}/${user.photo}`}   alt={user.fullname} className="h-full w-full rounded-full object-cover" />
+                    <img src={`${base_url}/${user.photo}`} alt={user.fullname} className="h-full w-full rounded-full object-cover" />
                   ) : (
-                    <FiUser className="text-gray-400" />
+                    <FiUser className="text-gray-400 dark:text-gray-500" />
                   )}
                 </div>
                 <div className="ml-4">
-                  <div className="text-sm font-medium text-gray-900">{user.fullname || 'N/A'}</div>
-                  <div className="text-sm text-gray-500">{user.email || 'N/A'}</div>
+                  <div className="text-sm font-medium text-gray-900 dark:text-white">{user.fullname || 'N/A'}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">{user.email || 'N/A'}</div>
                 </div>
               </div>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               {statusBadge(user.status)}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
               {user?.wallet[0]?.currency}
               {user?.wallet[0]?.saving?.toLocaleString('en-US')}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
               {user?.wallet[0]?.currency}
               {user?.wallet[0]?.checking?.toLocaleString('en-US')}
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
               {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
               <div className="flex justify-end space-x-2">
                 <button 
                   onClick={() => onView(user)}
-                  className="text-primary-2 hover:text-primary-600 p-1 rounded hover:bg-primary-2/10"
+                  className="text-primary-2 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 p-1 rounded hover:bg-primary-2/10 dark:hover:bg-primary-400/10 transition-colors"
                 >
                   <FiEye />
                 </button>
                 {user.status === 'active' ? (
                   <button
                     onClick={() => onStatusChange(user._id, 'deactivate')}
-                    className="text-yellow-500 hover:text-yellow-700 p-1 rounded hover:bg-yellow-500/10"
+                    className="text-yellow-500 hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300 p-1 rounded hover:bg-yellow-500/10 dark:hover:bg-yellow-400/10 transition-colors"
                     disabled={loading}
                   >
                     <FiUserX />
@@ -453,7 +446,7 @@ const UserListView = ({ users, onView, onStatusChange, onDelete, loading, status
                 ) : (
                   <button
                     onClick={() => onStatusChange(user._id, 'approve')}
-                    className="text-green-500 hover:text-green-700 p-1 rounded hover:bg-green-500/10"
+                    className="text-green-500 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 p-1 rounded hover:bg-green-500/10 dark:hover:bg-green-400/10 transition-colors"
                     disabled={loading}
                   >
                     <FiUserCheck />
@@ -461,7 +454,7 @@ const UserListView = ({ users, onView, onStatusChange, onDelete, loading, status
                 )}
                 <button
                   onClick={() => onDelete(user._id)}
-                  className="text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-500/10"
+                  className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded hover:bg-red-500/10 dark:hover:bg-red-400/10 transition-colors"
                   disabled={loading}
                 >
                   <FiTrash2 />
@@ -475,23 +468,23 @@ const UserListView = ({ users, onView, onStatusChange, onDelete, loading, status
   </div>
 );
 
-// User Grid View Component
+// User Grid View Component with dark mode
 const UserGridView = ({ users, onView, onFund, statusBadge }) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     {users.map(user => (
-      <div key={user._id} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+      <div key={user._id} className="bg-white dark:bg-slate-700 rounded-xl border border-gray-200 dark:border-slate-600 overflow-hidden hover:shadow-md transition-all">
         <div className="p-4">
           <div className="flex items-center space-x-4">
-            <div className="flex-shrink-0 h-12 w-12 bg-gray-200 rounded-full flex items-center justify-center">
+            <div className="flex-shrink-0 h-12 w-12 bg-gray-200 dark:bg-slate-600 rounded-full flex items-center justify-center">
               {user.photo ? (
                 <img src={`${base_url}/${user.photo}`} alt={user.fullname} className="h-full w-full rounded-full object-cover" />
               ) : (
-                <FiUser className="text-gray-400 text-xl" />
+                <FiUser className="text-gray-400 dark:text-gray-500 text-xl" />
               )}
             </div>
             <div>
-              <h3 className="text-lg font-medium text-gray-900">{user.fullname || 'N/A'}</h3>
-              <p className="text-sm text-gray-500">{user.email || 'N/A'}</p>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-white">{user.fullname || 'N/A'}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">{user.email || 'N/A'}</p>
               <div className="mt-1">
                 {statusBadge(user.status)}
               </div>
@@ -500,33 +493,37 @@ const UserGridView = ({ users, onView, onFund, statusBadge }) => (
           
           <div className="mt-4 grid grid-cols-3 gap-2 text-center">
             <div>
-              <p className="text-xs text-gray-500">Saving</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Saving</p>
+              <p className="font-medium text-gray-900 dark:text-white">
                 {user?.wallet[0]?.currency}
                 {user?.wallet[0]?.saving?.toLocaleString('en-US')}
-            </div>
-            <div>
-              <p className="text-xs text-gray-500">Checking</p>
-              <p className="font-medium">
-              {user?.wallet[0]?.currency}
-              {user?.wallet[0]?.checking?.toLocaleString('en-US')}
               </p>
             </div>
             <div>
-              <p className="text-xs text-gray-500">Date Join</p>
-              <p className="font-medium">{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Checking</p>
+              <p className="font-medium text-gray-900 dark:text-white">
+                {user?.wallet[0]?.currency}
+                {user?.wallet[0]?.checking?.toLocaleString('en-US')}
+              </p>
+            </div>
+            <div>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Date Join</p>
+              <p className="font-medium text-gray-900 dark:text-white">
+                {user.createdAt ? new Date(user.createdAt).toLocaleDateString() : 'N/A'}
+              </p>
             </div>
           </div>
           
           <div className="mt-4 flex space-x-2">
             <button
               onClick={() => onView(user)}
-              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 rounded-lg text-sm flex items-center justify-center"
+              className="flex-1 bg-gray-100 hover:bg-gray-200 dark:bg-slate-600 dark:hover:bg-slate-500 text-gray-800 dark:text-gray-200 py-2 rounded-lg text-sm flex items-center justify-center transition-colors"
             >
               <FiEye className="mr-1" /> View
             </button>
             <button
               onClick={() => onFund(user)}
-              className="flex-1 bg-primary-2 hover:bg-primary-600 text-white py-2 rounded-lg text-sm flex items-center justify-center"
+              className="flex-1 bg-primary-2 hover:bg-primary-600 text-white py-2 rounded-lg text-sm flex items-center justify-center transition-colors"
             >
               <FiDollarSign className="mr-1" /> Fund
             </button>

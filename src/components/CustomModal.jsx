@@ -23,7 +23,7 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
             <Dialog
                 as="div"
                 id="modal"
-                className="fixed inset-0 flex overflow-y-auto md:px-4 bg-black/50  md:py-6 sm:px-0 items-center z-50 transform transition-all h-screen"
+                className="fixed inset-0 flex overflow-y-auto px-4 py-6 sm:px-0 items-center z-50 transform transition-all"
                 onClose={() => {backDrop && close()}}
             >
                 <Transition.Child
@@ -35,7 +35,7 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="absolute inset-0 h-full" />
+                    <div className="absolute inset-0 bg-black/50" />
                 </Transition.Child>
 
                 <Transition.Child
@@ -48,19 +48,31 @@ export default function Modal({ children, show = false, maxWidth = '2xl', closea
                     leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
                     <Dialog.Panel
-                        className={`md:mb-6 bg-white md:rounded-lg shadow-xl md:mt-10 transform transition-all sm:w-full sm:mx-auto ${maxWidthClass} w-full h-full md:h-auto`}
+                        className={`bg-white dark:bg-slate-800 rounded-xl shadow-2xl transform transition-all sm:w-full sm:mx-auto ${maxWidthClass} w-full max-h-[85vh] overflow-y-auto relative`}
                     >
-                        <div className="relative z-50">
-                            <button className="absolute cursor-pointer -top-3 -right-3 bg-white rounded-full text-red-500 hidden md:block"  onClick={() => close()}>
-                                <FaTimesCircle className="h-6 w-6" />
+                        {/* Enhanced Close Button - Fixed positioning */}
+                        <button 
+                            className="absolute cursor-pointer top-4 right-4 bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 rounded-full text-white p-2 z-50 shadow-2xl hover:scale-110 transition-all duration-200 border-2 border-white dark:border-slate-800"
+                            onClick={() => close()}
+                        >
+                            <FaTimesCircle className="h-5 w-5" />
+                        </button>
+                        
+                        {/* Mobile Back Button */}
+                        <div className="md:hidden sticky top-0 z-40 bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-slate-600">
+                            <button 
+                                className="flex items-center gap-2 px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors w-full" 
+                                onClick={() => close()}
+                            >
+                                <BiArrowBack className="h-5 w-5" /> 
+                                <span className="font-medium">Back</span>
                             </button>
-                            <aside className="md:hidden p-2 font-bold border-b">
-                                <button className="flex items-center gap-2 px-2 py-1" onClick={() => close()}>
-                                    <BiArrowBack  className="h-6 w-6"  /> Back
-                                </button>
-                            </aside>
                         </div>
-                        {children}
+
+                        {/* Content */}
+                        <div className="pt-2 md:pt-0">
+                            {children}
+                        </div>
                     </Dialog.Panel>
                 </Transition.Child>
             </Dialog>

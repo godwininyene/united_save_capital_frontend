@@ -139,15 +139,15 @@ const SupportCenter = () => {
   return (
     <div className="">
       <div className="flex flex-col">
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden">
           {/* Tab Navigation */}
-          <div className="flex border-b border-gray-200">
+          <div className="flex border-b border-gray-200 dark:border-slate-700">
             <button
               onClick={() => setActiveTab("request")}
-              className={`px-6 py-4 font-medium text-sm flex items-center gap-2 ${
+              className={`px-6 py-4 font-medium text-sm flex items-center gap-2 cursor-pointer transition-colors ${
                 activeTab === "request" 
                   ? "text-primary-2 border-b-2 border-primary-2" 
-                  : "text-gray-500 hover:text-gray-700"
+                  : "text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300"
               }`}
             >
               <FiHeadphones />
@@ -155,10 +155,10 @@ const SupportCenter = () => {
             </button>
             <button
               onClick={() => setActiveTab("history")}
-              className={`px-6 py-4 font-medium text-sm flex items-center gap-2 ${
+              className={`px-6 py-4 font-medium text-sm flex items-center gap-2 cursor-pointer transition-colors ${
                 activeTab === "history" 
                   ? "text-primary-2 border-b-2 border-primary-2" 
-                  : "text-gray-500 hover:text-gray-700"
+                  : "text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-300"
               }`}
             >
               <FaHistory />
@@ -170,14 +170,17 @@ const SupportCenter = () => {
           <div className="p-6">
             {activeTab === "request" ? (
               <>
-                <h1 className="text-xl font-semibold text-gray-800 mb-2">Contact Support</h1>
-                <p className="text-gray-600 mb-6 flex items-center gap-1">
+                <h1 className="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-2">Contact Support</h1>
+                <p className="text-gray-600 dark:text-slate-400 mb-6 flex items-center gap-1">
                   <FiInfo className="text-primary-2" /> Fill out the form below and our team will get back to you soon
                 </p>
 
                 {successMessage && (
-                  <div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded-lg mb-6">
-                    {successMessage}
+                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/30 text-green-700 dark:text-green-400 p-4 rounded-lg mb-6">
+                    <div className="flex items-center gap-2">
+                      <FiCheckCircle className="text-lg" />
+                      <p>{successMessage}</p>
+                    </div>
                   </div>
                 )}
 
@@ -193,7 +196,8 @@ const SupportCenter = () => {
                         variant="outline"
                         required
                         placeholder="Select subject"
-                        classNames="border-b-2 border-gray-200 py-3 px-0"
+                        classNames="border-b-2 border-gray-200 dark:border-slate-600 py-3 px-0"
+                        error={!subject && preview ? "Subject is required" : undefined}
                       />
                     </div>
 
@@ -207,7 +211,8 @@ const SupportCenter = () => {
                         variant="outline"
                         required
                         placeholder="Select issue type"
-                        classNames="border-b-2 border-gray-200 py-3 px-0"
+                        classNames="border-b-2 border-gray-200 dark:border-slate-600 py-3 px-0"
+                        error={!issueType && preview ? "Issue type is required" : undefined}
                       />
                     </div>
 
@@ -221,34 +226,35 @@ const SupportCenter = () => {
                         required
                         placeholder="Describe your issue in detail"
                         isTextarea={true}
-                        classNames="border-b-2 border-gray-200 py-3 px-0 min-h-[120px]"
+                        classNames="border-b-2 border-gray-200 dark:border-slate-600 py-3 px-0 min-h-[120px]"
+                        error={!message && preview ? "Message is required" : undefined}
                       />
                     </div>
 
                     {/* Submit Button */}
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 px-5 py-3 bg-primary-2 text-white font-medium rounded-lg shadow-md transition-all hover:brightness-110 hover:scale-105"
+                      className="w-full flex cursor-pointer items-center justify-center gap-2 px-5 py-3 bg-primary-2 text-white font-medium rounded-lg shadow-md transition-all hover:brightness-110 hover:scale-105"
                     >
                       <FiMail className="text-lg" /> Submit Request
                     </button>
                   </form>
                 ) : (
                   <div>
-                    <h2 className="text-lg font-semibold text-gray-800 mb-4">Support Request Summary</h2>
+                    <h2 className="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-4">Support Request Summary</h2>
 
                     {/* Request Details Card */}
-                    <div className="bg-primary-2/5 p-4 rounded-lg border border-primary-2/20 mb-6">
+                    <div className="bg-primary-2/5 dark:bg-blue-900/20 p-4 rounded-lg border border-primary-2/20 dark:border-blue-800/30 mb-6">
                       <div className="space-y-3">
                         <div>
-                          <p className="text-sm text-gray-600">Subject</p>
-                          <p className="font-medium text-gray-800">
+                          <p className="text-sm text-gray-600 dark:text-slate-400">Subject</p>
+                          <p className="font-medium text-gray-800 dark:text-slate-100">
                             {subjectOptions.find(s => s.value === subject)?.label || subject}
                           </p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-600">Issue Type</p>
-                          <p className="font-medium text-gray-800">
+                          <p className="text-sm text-gray-600 dark:text-slate-400">Issue Type</p>
+                          <p className="font-medium text-gray-800 dark:text-slate-100">
                             {issueTypes.find(i => i.value === issueType)?.label || issueType}
                           </p>
                         </div>
@@ -258,9 +264,9 @@ const SupportCenter = () => {
                     {/* Message Preview */}
                     <div className="space-y-4 mb-6">
                       <div>
-                        <p className="text-sm text-gray-600">Your Message</p>
-                        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 mt-1">
-                          <p className="text-gray-800 whitespace-pre-line">{message}</p>
+                        <p className="text-sm text-gray-600 dark:text-slate-400">Your Message</p>
+                        <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-lg border border-gray-200 dark:border-slate-600 mt-1">
+                          <p className="text-gray-800 dark:text-slate-200 whitespace-pre-line">{message}</p>
                         </div>
                       </div>
                     </div>
@@ -269,14 +275,16 @@ const SupportCenter = () => {
                     <div className="flex gap-3">
                       <button
                         onClick={() => setPreview(false)}
-                        className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-300"
+                        className="flex items-center cursor-pointer justify-center gap-2 w-full px-5 py-3 bg-gray-200 dark:bg-slate-700 text-gray-700 dark:text-slate-300 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-slate-600 transition-colors"
                       >
                         <FiMessageSquare /> Edit Message
                       </button>
                       <button
                         onClick={handleConfirm}
-                        className={`w-full px-5 py-3 text-white font-medium rounded-lg shadow-md transition-all ${
-                          isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-primary-2 hover:brightness-110"
+                        className={`w-full px-5 py-3 text-white font-medium rounded-lg shadow-md transition-all cursor-pointer ${
+                          isSubmitting 
+                            ? "bg-gray-400 dark:bg-slate-600 cursor-not-allowed" 
+                            : "bg-primary-2 hover:brightness-110"
                         }`}
                         disabled={isSubmitting}
                       >
@@ -288,43 +296,43 @@ const SupportCenter = () => {
               </>
             ) : (
               <>
-                <h1 className="text-xl font-semibold text-gray-800 mb-2">Support History</h1>
-                <p className="text-gray-600 mb-6 flex items-center gap-1">
+                <h1 className="text-xl font-semibold text-gray-800 dark:text-slate-100 mb-2">Support History</h1>
+                <p className="text-gray-600 dark:text-slate-400 mb-6 flex items-center gap-1">
                   <FiInfo className="text-primary-2" /> View your past support requests and their status
                 </p>
 
                 {supportHistory.length === 0 ? (
                   <div className="text-center py-8">
-                    <FaHistory className="mx-auto text-gray-400 text-3xl mb-3" />
-                    <h3 className="text-lg font-medium text-gray-700">No support history found</h3>
-                    <p className="text-gray-500 mt-1">You haven't contacted support yet</p>
+                    <FaHistory className="mx-auto text-gray-400 dark:text-slate-500 text-3xl mb-3" />
+                    <h3 className="text-lg font-medium text-gray-700 dark:text-slate-300">No support history found</h3>
+                    <p className="text-gray-500 dark:text-slate-400 mt-1">You haven't contacted support yet</p>
                   </div>
                 ) : (
-                  <div className="divide-y divide-gray-200">
+                  <div className="divide-y divide-gray-200 dark:divide-slate-700">
                     {supportHistory.map((ticket) => (
-                      <div key={ticket.id} className="py-4">
+                      <div key={ticket.id} className="py-4 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors rounded-lg px-2">
                         <div className="flex items-start justify-between">
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-semibold text-gray-800 truncate">
+                              <span className="font-semibold text-gray-800 dark:text-slate-100 truncate">
                                 {ticket.subject}
                               </span>
-                              <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 whitespace-nowrap">
+                              <span className="text-xs px-2 py-1 rounded-full bg-gray-100 dark:bg-slate-600 text-gray-600 dark:text-slate-300 whitespace-nowrap">
                                 {issueTypes.find(i => i.value === ticket.issueType)?.label || ticket.issueType}
                               </span>
                             </div>
-                            <p className="text-sm text-gray-600 truncate">{ticket.message}</p>
-                            <p className="text-xs text-gray-500 mt-1">
+                            <p className="text-sm text-gray-600 dark:text-slate-400 truncate">{ticket.message}</p>
+                            <p className="text-xs text-gray-500 dark:text-slate-500 mt-1">
                               Submitted on {formatDate(ticket.date)}
                             </p>
                           </div>
                           <div className="flex items-center gap-2 ml-4">
                             {getStatusIcon(ticket.status)}
                             <span className={`text-sm whitespace-nowrap ${
-                              ticket.status === 'resolved' ? 'text-green-600' :
-                              ticket.status === 'in_progress' ? 'text-blue-600' :
-                              ticket.status === 'pending' ? 'text-yellow-600' :
-                              'text-red-600'
+                              ticket.status === 'resolved' ? 'text-green-600 dark:text-green-400' :
+                              ticket.status === 'in_progress' ? 'text-blue-600 dark:text-blue-400' :
+                              ticket.status === 'pending' ? 'text-yellow-600 dark:text-yellow-400' :
+                              'text-red-600 dark:text-red-400'
                             }`}>
                               {getStatusText(ticket.status)}
                             </span>

@@ -17,7 +17,6 @@ const UserSettings = () => {
   const base_url = import.meta.env.VITE_APP_BASE_URL;
 
   const handleProfileUpdate = async (e) => {
- 
     e.preventDefault();
     setIsSubmitting(true);
     setProfileSuccess(null);
@@ -89,60 +88,91 @@ const UserSettings = () => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-6">User Settings</h2>
+    <div className="p-6 bg-white dark:bg-slate-800 shadow-md rounded-lg">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-slate-100">User Settings</h2>
 
       {/* Profile Settings */}
-      <div className="mb-6 border-b pb-6">
-        <h3 className="text-lg font-semibold mb-3">Profile Information</h3>
+      <div className="mb-6 border-b border-gray-200 dark:border-slate-700 pb-6">
+        <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-slate-100">Profile Information</h3>
         {profileSuccess && (
-          <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
+          <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded border border-green-200 dark:border-green-800/30">
             {profileSuccess}
           </div>
         )}
         <form onSubmit={handleProfileUpdate} className="space-y-4">
           <InputField
+            label="Full Name"
             defaultValue={user?.fullname || 'N/A'}
             onChange={(e) => setUser({ ...user, name: e.target.value })}
             name={'fullname'}
             error={errors.fullname}
+            variant="outline"
           />
           <InputField
+            label="Email Address"
             defaultValue={user?.email || 'N/A'}
             onChange={(e) => setUser({ ...user, email: e.target.value })}
             name={'email'}
             error={errors.email}
+            variant="outline"
           />
           <InputField
+            label="Phone Number"
             defaultValue={user?.phone || 'N/A'}
             onChange={(e) => setUser({ ...user, phone: e.target.value })}
             name={'phone'}
             error={errors.phone}
+            variant="outline"
           />
-          <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-blue-100 dark:border-slate-700 mb-3">
-            <img 
-              src={`${base_url}/${avatarPreview}`} 
-              alt="Profile" 
-              className="w-full h-full object-cover"
-            />
+          
+          {/* Avatar Upload */}
+          <div className="space-y-3">
+            <p className="text-sm font-medium text-gray-700 dark:text-slate-300">Profile Photo</p>
+            <div className="flex items-center gap-6">
+              <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-blue-100 dark:border-slate-600">
+                <img 
+                  src={avatarPreview?.startsWith('data:') ? avatarPreview : `${base_url}/${avatarPreview}`} 
+                  alt="Profile" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-primary-2 text-white rounded-lg hover:bg-primary-2/90 transition-colors">
+                  Change Photo
+                  <input
+                    type="file" 
+                    className="hidden" 
+                    accept="image/*"
+                    name={'photo'}
+                    onChange={handleAvatarChange}
+                  />
+                </label>
+                {errors.photo && (
+                  <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.photo}</p>
+                )}
+                <p className="text-xs text-gray-500 dark:text-slate-400 mt-2">
+                  Recommended: Square image, max 2MB
+                </p>
+              </div>
+            </div>
           </div>
-          <label className="cursor-pointer text-blue-600 dark:text-blue-400 hover:underline mb-2">
-            Change Photo
-            <InputField
-              type="file" 
-              classNames="hidden" 
-              accept="image/*"
-              name={'photo'}
-              onChange={handleAvatarChange}
-              isRequired={false}
-              error={errors.photo}
-            />
-          </label>
+
+          {/* Error message for general profile errors */}
+          {errors.general && (
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded border border-red-200 dark:border-red-800/30">
+              {errors.general}
+            </div>
+          )}
+
           <div className="mt-3">
             <button 
               disabled={isSubmitting}
               type="submit" 
-              className={`text-white px-4 py-2 rounded ${isSubmitting ? 'cursor-not-allowed bg-slate-400' : 'cursor-pointer bg-blue-500'}`}
+              className={`px-6 py-3 rounded-lg font-medium transition-all ${
+                isSubmitting 
+                  ? 'cursor-not-allowed bg-gray-400 dark:bg-slate-600 text-white' 
+                  : 'cursor-pointer bg-primary-2 hover:bg-primary-2/90 text-white hover:scale-[1.02]'
+              }`}
             >
               {isSubmitting ? 'Processing...' : 'Update Profile'}
             </button>
@@ -151,42 +181,60 @@ const UserSettings = () => {
       </div>
 
       {/* Password Change */}
-      <div className="mb-6 border-b pb-6">
-        <h3 className="text-lg font-semibold mb-3">Change Password</h3>
+      <div className="mb-6 border-b border-gray-200 dark:border-slate-700 pb-6">
+        <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-slate-100">Change Password</h3>
         {passwordSuccess && (
-          <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
+          <div className="mb-4 p-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded border border-green-200 dark:border-green-800/30">
             {passwordSuccess}
           </div>
         )}
         <form onSubmit={handlePasswordChange} className="space-y-4">
           <InputField
             type="password"
+            label="Current Password"
             value={password.current}
             onChange={(e) => setPassword({ ...password, current: e.target.value })}
-            placeholder="Current Password"
+            placeholder="Enter current password"
             required
             error={errors.passwordCurrent}
+            variant="outline"
           />
           <InputField
             type="password"
+            label="New Password"
             value={password.new}
             onChange={(e) => setPassword({ ...password, new: e.target.value })}
-            placeholder="New Password"
+            placeholder="Enter new password"
             required
             error={errors.password}
+            variant="outline"
           />
           <InputField
             type="password"
+            label="Confirm New Password"
             value={password.confirm}
             onChange={(e) => setPassword({ ...password, confirm: e.target.value })}
-            placeholder="Confirm New Password"
+            placeholder="Confirm new password"
             required
             error={errors.passwordConfirm}
+            variant="outline"
           />
+
+          {/* Error message for general password errors */}
+          {errors.general && (
+            <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded border border-red-200 dark:border-red-800/30">
+              {errors.general}
+            </div>
+          )}
+
           <button 
             type="submit" 
             disabled={isPasswordSubmitting}
-            className={`text-white px-4 py-2 rounded ${isPasswordSubmitting ? 'cursor-not-allowed bg-slate-400' : 'cursor-pointer bg-green-500'}`}
+            className={`px-6 py-3 rounded-lg font-medium transition-all ${
+              isPasswordSubmitting 
+                ? 'cursor-not-allowed bg-gray-400 dark:bg-slate-600 text-white' 
+                : 'cursor-pointer bg-green-500 hover:bg-green-600 text-white hover:scale-[1.02]'
+            }`}
           >
             {isPasswordSubmitting ? 'Processing...' : 'Update Password'}
           </button>
@@ -195,14 +243,26 @@ const UserSettings = () => {
 
       {/* Notification Settings */}
       <div>
-        <h3 className="text-lg font-semibold mb-3">Notification Preferences</h3>
-        <div className="flex items-center space-x-4">
-          <label className="flex items-center">
-            <input type="checkbox" name="email" checked={notifications.email} onChange={handleNotificationChange} className="mr-2" />
+        <h3 className="text-lg font-semibold mb-3 text-gray-800 dark:text-slate-100">Notification Preferences</h3>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+          <label className="flex items-center gap-2 text-gray-700 dark:text-slate-300">
+            <input 
+              type="checkbox" 
+              name="email" 
+              checked={notifications.email} 
+              onChange={handleNotificationChange} 
+              className="w-4 h-4 text-primary-2 bg-gray-100 dark:bg-slate-700 border-gray-300 dark:border-slate-600 rounded focus:ring-primary-2 focus:ring-2" 
+            />
             Email Notifications
           </label>
-          <label className="flex items-center">
-            <input type="checkbox" name="sms" checked={notifications.sms} onChange={handleNotificationChange} className="mr-2" />
+          <label className="flex items-center gap-2 text-gray-700 dark:text-slate-300">
+            <input 
+              type="checkbox" 
+              name="sms" 
+              checked={notifications.sms} 
+              onChange={handleNotificationChange} 
+              className="w-4 h-4 text-primary-2 bg-gray-100 dark:bg-slate-700 border-gray-300 dark:border-slate-600 rounded focus:ring-primary-2 focus:ring-2" 
+            />
             SMS Notifications
           </label>
         </div>

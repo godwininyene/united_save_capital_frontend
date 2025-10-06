@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
-
+@custom-variant dark (&:where(.dark, .dark *));
 @theme {
   --color-primary: #00040f;
   --color-primary-2:#FF4E50;
@@ -25,24 +25,6 @@
   --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
 
   
-}
-
-/* Enable dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #00d094;
-    --color-dark: #00150f;
-    --color-dark-light: #0b201a;
-    --color-text-dark: #939b99;
-    --color-primary-light: #fc9e12;
-  }
-  .dark {
-    --color-primary: #00d094;
-    --color-dark: #00150f;
-    --color-dark-light: #0b201a;
-    --color-text-dark: #939b99;
-    --color-primary-light: #fc9e12;
-  }
 }
 
 .trusted__card {
