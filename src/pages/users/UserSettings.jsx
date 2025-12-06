@@ -131,7 +131,7 @@ const UserSettings = () => {
             <div className="flex items-center gap-6">
               <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-blue-100 dark:border-slate-600">
                 <img 
-                  src={avatarPreview?.startsWith('data:') ? avatarPreview : `${base_url}/${avatarPreview}`} 
+                  src={avatarPreview?.startsWith('data:') ? avatarPreview : `${avatarPreview}`} 
                   alt="Profile" 
                   className="w-full h-full object-cover"
                 />

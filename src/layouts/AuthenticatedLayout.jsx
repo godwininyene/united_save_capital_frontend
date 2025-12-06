@@ -84,7 +84,7 @@ export default function AuthenticatedLayout() {
                         </span>
                         <span>
                             <img 
-                                src={`${base_url}/${avatar}`} 
+                                src={`${avatar}`} 
                                 alt="profile photo" 
                                 className={`bg-slate-300 dark:bg-slate-600 h-10 w-10 rounded-full overflow-hidden border-2 border-white dark:border-slate-600`} 
                             />
